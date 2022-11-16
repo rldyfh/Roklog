@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div th:object="${post}">
+        <button th:onclick="|location.href='@{/post}'|">
+            글쓰기
+        </button>
+        <button th:onclick="|location.href='@{/member}'|">
+            회원가입
+        </button>
+        <button th:onclick="|location.href='@{/login}'|">
+            로그인
+        </button>
+        <br/>
+        <div th:each="post : ${posts}">
+            <div><a th:text="${post.title}" th:href="@{|/post/${post.id}|}"></a></div>
+            <div><a th:text="${post.content}" th:href="@{|/post/${post.id}|}"></a></div>
+            </br>
+        </div>
+    </div>
+</body>
+</html>

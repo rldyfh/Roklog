@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div th:object="${post}">
+        <div th:text="${post.title}"></div>
+        <div th:text="${post.content}"></div>
+    </div>
+
+    <div>
+        <button th:onclick="|location.href='@{|/post/${post.id}/edit|}'|">글 수정</button>
+        <button th:onclick="|location.href='/'|">뒤로가기</button>
+    </div>
+    <form th:action="@{|/delete/${post.id}|}" method="post">
+        <button type="submit">삭제하기</button>
+    </form>
+</body>
+</html>

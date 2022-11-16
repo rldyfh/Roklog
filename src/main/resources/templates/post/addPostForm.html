@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+  <form th:action th:object="${post}" method="post">
+
+      <div th:if="${#fields.hasGlobalErrors()}">
+          <p th:each="err : ${#fields.globalErrors()}" th:text="${err}">전체 오류 메시지</p>
+      </div>
+        <div>
+            <label for="title">title</label>
+            <input type="text" id="title" name="title" th:field="*{title}">
+        </div>
+        <div th:errors="*{title}">제목 오류</div>
+      <div>
+            <label for="textarea">content</label>
+            <textarea id="textarea" row="30" cols="100" name="content" th:field="*{content}"></textarea>
+      </div>
+      <div th:errors="*{content}">글 내용 오류</div>
+      <button type="submit">글 작성</button>
+  </form>
+</body>
+</html>

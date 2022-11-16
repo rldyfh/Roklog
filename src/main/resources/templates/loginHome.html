@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div th:object="${member}" th:text="|hello ${member.loginId}|">
+        로그인 환영 메세지
+    </div>
+    <div th:object="${post}">
+        <button th:onclick="|location.href='@{/post}'|">
+            글쓰기
+        </button>
+
+        <form th:action="@{/logout}" method="post">
+            <button th:onclick="|location.href='@{/}'|">
+                로그아웃
+            </button>
+        </form>
+
+        <br/>
+        <div th:each="post : ${posts}">
+            <div><a th:text="${post.title}" th:href="@{|/post/${post.id}|}"></a></div>
+            <div><a th:text="${post.content}" th:href="@{|/post/${post.id}|}"></a></div>
+            </br>
+        </div>
+    </div>
+</body>
+</html>

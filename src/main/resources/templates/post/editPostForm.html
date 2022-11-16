@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <form th:object="${post}" method="post">
+        <div>
+            <input th:field="${post.title}">
+            <div th:errors="*{title}">제목 오류</div>
+
+            <input th:field="${post.content}">
+            <div th:errors="*{content}">내용 오류</div>
+        </div>
+
+        <div>
+            <button>글 수정</button>
+            <button th:onclick="|location:href='@{|/post/{post.id}|}'|">취소</button>
+        </div>
+    </form>
+</body>
+</html>
