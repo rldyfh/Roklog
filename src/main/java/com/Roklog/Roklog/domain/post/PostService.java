@@ -1,9 +1,14 @@
 package com.Roklog.Roklog.domain.post;
 
+import com.Roklog.Roklog.domain.member.Member;
+import com.Roklog.Roklog.domain.member.MemberRepository;
+import com.Roklog.Roklog.web.member.request.MemberResponse;
 import com.Roklog.Roklog.web.post.request.PostCreate;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Service
@@ -11,13 +16,14 @@ import java.util.List;
 public class PostService {
 
     private final PostRepository postRepository;
+    private final MemberRepository memberRepository;
 
-    public Long write(PostCreate postCreate) {
+    public Long write(PostCreate postCreate, Member loginMember) {
 
-        Post post = Post.builder()
-                .title(postCreate.getTitle())
-                .content(postCreate.getContent())
-                .build();
+        Post post = new Post();
+        post.setTitle(postCreate.getTitle());
+        post.setContent(postCreate.getContent());
+        post.setMember(loginMember);
 
         return postRepository.save(post);
     }

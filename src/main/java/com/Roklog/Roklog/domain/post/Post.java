@@ -1,25 +1,26 @@
 package com.Roklog.Roklog.domain.post;
 
+import com.Roklog.Roklog.domain.member.Member;
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
-@Builder
 public class Post {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Long id;
+    private Long id;
 
-    public String title;
-    public String content;
+    private String title;
+    private String content;
+
+    @ManyToOne
+    @JoinColumn(name="member_id")
+    private Member member;
 
     private Post(Long id, String title, String content) {
         this.id = id;

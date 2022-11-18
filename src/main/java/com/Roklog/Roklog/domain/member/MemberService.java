@@ -9,12 +9,12 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class MemberService {
 
-    private final MemberRepository memberRepository;
+    private final MemoryMemberRepository memoryMemberRepository;
 
     public void enroll(MemberRequest memberRequest) {
         Member member = new Member(memberRequest.getLoginId(), memberRequest.getPassword());
 
-        memberRepository.save(member);
+        memoryMemberRepository.save(member);
     }
 
 }

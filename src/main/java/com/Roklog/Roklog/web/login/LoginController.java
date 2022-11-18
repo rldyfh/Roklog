@@ -2,6 +2,7 @@ package com.Roklog.Roklog.web.login;
 
 
 import com.Roklog.Roklog.domain.login.LoginService;
+import com.Roklog.Roklog.domain.member.Member;
 import com.Roklog.Roklog.domain.member.MemberService;
 import com.Roklog.Roklog.web.member.request.MemberRequest;
 import com.Roklog.Roklog.web.member.request.MemberResponse;
@@ -38,7 +39,7 @@ public class LoginController {
             return "login/loginForm";
         }
 
-        MemberResponse loginMember = loginService.login(member.getLoginId(), member.getPassword());
+        Member loginMember = loginService.login(member.getLoginId(), member.getPassword());
 
         if(loginMember == null) {
             bindingResult.reject("loginFail", "아이디 또는 비밀번호가 맞지 않습니다.");

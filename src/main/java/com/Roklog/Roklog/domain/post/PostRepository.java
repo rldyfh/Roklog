@@ -3,6 +3,7 @@ package com.Roklog.Roklog.domain.post;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

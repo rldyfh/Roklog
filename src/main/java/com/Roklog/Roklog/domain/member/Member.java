@@ -1,13 +1,13 @@
 package com.Roklog.Roklog.domain.member;
 
+import com.Roklog.Roklog.domain.post.Post;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -16,11 +16,14 @@ public class Member {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Long id;
+    private Long id;
 
-    public String loginId;
+    private String loginId;
 
-    public String password;
+    private String password;
+
+    @OneToMany(mappedBy = "member")
+    private final List<Post> posts = new ArrayList<>();
 
     public Member(String loginId, String password) {
         this.loginId = loginId;

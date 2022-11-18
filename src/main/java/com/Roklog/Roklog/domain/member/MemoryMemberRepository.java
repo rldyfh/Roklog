@@ -6,11 +6,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import java.util.List;
-import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
-public class MemberRepository {
+public class MemoryMemberRepository implements MemberRepository{
 
     private final EntityManager em;
 

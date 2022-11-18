@@ -1,5 +1,6 @@
 package com.Roklog.Roklog.web.post;
 
+import com.Roklog.Roklog.domain.member.Member;
 import com.Roklog.Roklog.domain.post.Post;
 import com.Roklog.Roklog.web.member.request.MemberResponse;
 import com.Roklog.Roklog.web.post.request.PostCreate;
@@ -57,10 +58,11 @@ public class PostController {
     }
 
     @PostMapping("/post")
-    public String post(@Validated @ModelAttribute("post") PostCreate post, BindingResult bindingResult) {
+    public String post(@Validated @ModelAttribute("post") PostCreate post, BindingResult bindingResult, HttpServletRequest request) {
 
         if(!StringUtils.hasText(post.getTitle()) || !StringUtils.hasText(post.getContent())) {
             bindingResult.reject("hasError", "제목과 내용 둘 다 입력해주세요.");
+
         }
 
         if(bindingResult.hasErrors()) {
@@ -68,7 +70,13 @@ public class PostController {
             return "post/addPostForm";
         }
 
-        postService.write(new PostCreate(post.getTitle(), post.getContent()));
+
+        HttpSession session = request.getSession(false);
+        Member loginMember = (Member) session.getAttribute("loginMember");
+
+        log.info("member = {}", loginMember);
+
+        postService.write(new PostCreate(post.getTitle(), post.getContent()), loginMember);
         return "redirect:/";
 
     }
